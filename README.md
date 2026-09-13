@@ -1,4 +1,4 @@
-﻿# Scaling Direct Cloud Upload Auditing via Autonomous AI Agents
+# Scaling Direct Cloud Upload Auditing via Autonomous AI Agents
 
 **Final-Year B.Tech Major Project**  
 **Academic Year:** 2026  
@@ -112,94 +112,48 @@ Our auditor observes this entire process and tests for vulnerabilities:
 
 ## 8. System Architecture
 
-The overall system architecture combines our controlled testing environment with the auditing engine:
-
 ```mermaid
-flowchart TB
-    subgraph UI_Layer["User & Dashboard Layer (Planned - Phase 4)"]
-        User["User / Security Tester"]
-        Dashboard["Auditor Dashboard (Streamlit / Web UI) [PLANNED]"]
-        User --> Dashboard
-    end
-
-    subgraph AI_Layer["AI Agent Layer (Planned - Phase 3)"]
-        AIAgent["AI Policy Analyzer & Remediation Agent (Gemini API) [PLANNED]"]
-        DB[("Audit Database (SQLite) [PLANNED]")]
-        Dashboard --> AIAgent
-        AIAgent --> DB
-    end
-
-    subgraph CoreEngine["Auditor Core Engine (Completed - Phase 2)"]
-        Observer["Playwright Workflow Observer\n(Headless Chromium) [CURRENT]"]
-        Traces[("Captured Traces\ndata/traces/*.json [CURRENT]")]
-        
-        subgraph Probes["Deterministic Probe Suite [CURRENT]"]
-            P1["V1: Credential Auth Probe"]
-            P2["V2: Validity TTL Probe"]
-            P3["V3: Type & Size Probe"]
-            P4["V4: Key Overwrite Probe"]
-            P5["V5: Public ACL Probe"]
-            P6["V6: Callback Spoofing Probe"]
-            Runner["ProbeRunner Orchestrator"]
-        end
-        
-        Reports[("Audit Reports\ndata/reports/*.json [CURRENT]")]
-    end
-
-    subgraph TargetApp["Controlled Local Testbed (Completed - Phase 1)"]
-        WebApp["FastAPI Test Web App (Port 8000)\n• /api/get-upload-url\n• /api/upload-complete [CURRENT]"]
-        Storage["Local MinIO S3 Storage (Port 9000)\n• auditor-test-bucket [CURRENT]"]
-        WebApp <-->|Presigned URLs & Callbacks| Storage
-    end
-
-    AIAgent -.->|Will Trigger| Observer
-    Observer -->|Navigates & Traces| WebApp
-    Observer -->|Monitors Direct Upload| Storage
-    Observer -->|Saves Telemetry| Traces
-    Traces --> Runner
-    Runner --> P1 & P2 & P3 & P4 & P5 & P6
-    P1 & P2 & P3 & P4 & P5 & P6 --> Runner
-    Runner -->|Saves Findings| Reports
-    Reports -.->|Will Feed Into| AIAgent
+flowchart TD
+    A["Controlled Testbed\n(FastAPI + MinIO)"] --> B["Workflow Observer\n(Playwright)"]
+    B --> C["Probe Engine\n(V1–V6)"]
+    C --> D["Audit Reports\n(JSON)"]
+    D --> E["AI Agents\n(Planned – Phase 3)"]
 ```
 
-> **Component Status Note:**
-> - **[CURRENT]** Controlled Testbed (FastAPI + MinIO), Playwright Observer, and Deterministic Probes (V1–V6) are **fully implemented and verified**.
-> - **[PLANNED]** AI Agent Layer (Gemini API), SQLite database integration, and Auditor Dashboard UI are **planned for Phases 3 and 4**.
+Current implementation includes the Controlled Testbed, Playwright Workflow Observer, V1–V6 Probe Engine, and JSON Audit Reports.
+
+AI Agents will be developed in Phase 3.
 
 ---
 
 ## 9. Project Workflow
 
-The direct cloud upload lifecycle and our auditing process happen across three main stages:
-
 ```mermaid
-sequenceDiagram
-    autonumber
-    participant Browser as Browser (Playwright Observer)
-    participant Backend as Web App Backend (FastAPI :8000)
-    participant Storage as Cloud Storage (MinIO :9000)
-
-    Note over Browser,Backend: Stage 1: Credential Requesting & Dispatching
-    Browser->>Backend: POST /api/get-upload-url (filename, type, size)
-    Backend-->>Browser: Returns Presigned URL / POST Policy + Storage Key
-    Note over Browser: Auditor captures Stage 1 URL, headers, key, and TTL
-
-    Note over Browser,Storage: Stage 2: Direct File Upload
-    Browser->>Storage: PUT / POST file directly to MinIO bucket
-    Storage-->>Browser: HTTP 200/204 Upload Successful
-    Note over Browser: Auditor captures Stage 2 storage URL, status code, and headers
-
-    Note over Browser,Backend: Stage 3: Callback Notification & Response
-    Browser->>Backend: POST /api/upload-complete (key, filename, signature)
-    Backend-->>Browser: HTTP 200 (Registered) or HTTP 403 (Rejected)
-    Note over Browser: Auditor captures Stage 3 callback payload and verification result
+flowchart TD
+    Start([Start]) --> A["Open Controlled Test Application"]
+    A --> B["Observe File Upload using Playwright"]
+    B --> C["Capture Upload Workflow"]
+    C --> D["Run V1–V6 Security Probes"]
+    D --> E["Classify Security Findings"]
+    E --> F["Generate Audit Report"]
+    F --> G["AI Analysis and Remediation (Planned)"]
+    G --> EndNode([End])
 ```
 
-### How the Auditor Evaluates the Captured Workflow:
-1. **Trace Capture:** Playwright records the requests and responses from all three stages into a structured `WorkflowTrace` JSON file.
-2. **Deterministic Probing:** `ProbeRunner` runs the V1–V6 probe scripts using the trace data and targeted verification checks.
-3. **Report Generation:** Findings are saved into a structured JSON report in `data/reports/`.
+### Direct Upload Stages
+
+The direct cloud upload lifecycle happens across three main stages:
+
+1. **Stage 1 – Credential Requesting & Dispatching:**  
+   The user's browser requests temporary upload credentials (presigned URL or POST policy) from the application backend before uploading the file.
+
+2. **Stage 2 – Direct File Upload:**  
+   The browser sends the file payload directly to cloud object storage (MinIO/S3) using the dispatched credentials, bypassing the application server.
+
+3. **Stage 3 – Callback Notification & Response:**  
+   Once storage accepts the file, the browser informs the backend via a callback endpoint so the application can register the uploaded file record.
+
+The Workflow Observer captures telemetry across all three stages, and the Probe Engine evaluates them for V1–V6 security flaws.
 
 ---
 
@@ -258,18 +212,22 @@ When all four phases of the project are complete, the system will:
 
 ## 13. Technology Stack
 
-| Layer | Technology | Where / Why It Is Used | Status |
-| :--- | :--- | :--- | :--- |
-| **Core Auditor Language** | **Python 3.11+ / 3.13** | Main language for the testbed, browser observer, probes, and models. | **CURRENT** |
-| **Controlled Test Web App** | **FastAPI + Jinja2 + JS** | Local web application that simulates direct uploads and provides toggleable V1–V6 scenarios. | **CURRENT** |
-| **Local Object Storage** | **MinIO (Standalone .exe)** | Local S3-compatible cloud storage server running on port 9000. | **CURRENT** |
-| **Browser Automation** | **Playwright for Python** | Automates headless Chromium to visit the upload form, trigger uploads, and capture network traces. | **CURRENT** |
-| **Cloud Storage SDK** | **Boto3 & Botocore** | Python SDK for AWS S3 used to generate presigned URLs and manage bucket settings. | **CURRENT** |
-| **Data Validation & Models** | **Pydantic (v2)** | Defines structured schemas for traces, probe findings, and audit reports. | **CURRENT** |
-| **HTTP Communication** | **Requests & HTTPX** | Used by verification probes to send HTTP requests to testbed endpoints and MinIO. | **CURRENT** |
-| **AI Agents** | **Google Gemini API** | Planned LLM reasoning for policy analysis and remediation generation. | **PLANNED (Phase 3)** |
-| **Audit Database** | **SQLite** | Planned storage for scan history, telemetry logs, and finding records. | **PLANNED** |
-| **Auditor UI / Dashboard** | **Streamlit / Web UI** | Planned user interface to launch audits and view visual reports. | **PLANNED (Phase 4)** |
+| Layer | Technology | Where / Why It Is Used |
+| :--- | :--- | :--- |
+| **Core Auditor Language** | **Python 3.11+ / 3.13** | Main programming language used for the testbed, browser observer, probes, and data models. |
+| **Controlled Test Web App** | **FastAPI + Jinja2 + JavaScript** | Local web application that simulates direct uploads and provides toggleable V1–V6 security profiles. |
+| **Local Object Storage** | **MinIO** | Acts as local S3-compatible cloud storage where uploaded files are stored. |
+| **Browser Automation** | **Playwright for Python** | Automates browser interaction, triggers uploads, and captures multi-stage network traces. |
+| **Cloud Storage SDK** | **Boto3 + Botocore** | AWS S3 Python SDK used for generating presigned URLs and managing bucket configurations. |
+| **Data Validation & Models** | **Pydantic** | Defines structured schemas for captured traces, probe findings, and audit reports. |
+| **HTTP Client** | **Requests + HTTPX** | Used by verification probes to send HTTP requests to testbed endpoints and MinIO storage. |
+| **AI Agents** | **Google Gemini API** | Planned LLM reasoning and analysis by AI agents for policy evaluation and remediation. |
+| **Audit Database** | **SQLite** | Planned local database for storing audit history, logs, and finding records. |
+| **Auditor UI / Dashboard** | **Streamlit / Web UI** | Planned dashboard for starting audits, visualizing scan graphs, and viewing results. |
+
+**Current implementation:** Python, FastAPI, MinIO, Playwright, Boto3/Botocore, Pydantic, Requests and HTTPX are implemented and verified.
+
+**Planned:** Google Gemini API, SQLite and Dashboard will be developed in Phases 3 and 4.
 
 ---
 
