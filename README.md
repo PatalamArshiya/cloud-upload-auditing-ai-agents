@@ -50,7 +50,7 @@ This creates three main challenges:
 
 - **Direct uploads are everywhere:** Almost all modern SaaS applications, social networks, and file-sharing portals use direct cloud uploads to handle large files efficiently.
 - **Multi-party security boundary:** The direct upload process involves three separate parties: the client browser, the application backend, and the cloud storage service. A mistake in any of these three parts can lead to data leaks or unauthorized file uploads.
-- **Need for scalable testing:** By automating browser observation and probe testing, security audits can be completed in seconds instead of hours, making regular security audits practical for development teams.
+- **Need for scalable testing:** By automating browser observation and probe testing, our approach reduces the manual effort required for security audits and makes regular testing more practical for development teams.
 
 ---
 
@@ -339,9 +339,9 @@ We tested our deterministic probe suite against our controlled local testbed usi
 
 | Test Profile | Scenario Description | Expected Ground Truth | Actual Automated Probe Finding | Result |
 | :--- | :--- | :--- | :--- | :---: |
-| **`VULNERABLE`** | All 6 vulnerability settings turned ON | 6 Vulnerabilities | **V1, V2, V3, V4, V5, V6 all detected** | **PASS (100% Recall)** |
-| **`SAFE`** | Fully hardened security settings turned ON | 0 Vulnerabilities | **All 6 checks passed as SAFE** | **PASS (0% False Positives)** |
-| **`V1_ONLY`** | Only V1 turned ON; V2–V6 hardened | 1 Vulnerability (V1) | **V1: Vulnerable \| V2–V6: SAFE** | **PASS (100% Precision)** |
+| **`VULNERABLE`** | All 6 vulnerability settings turned ON | 6 Vulnerabilities | **V1, V2, V3, V4, V5, V6 all detected** | **PASS** |
+| **`SAFE`** | Fully hardened security settings turned ON | 0 Vulnerabilities | **All 6 checks passed as SAFE** | **PASS** |
+| **`V1_ONLY`** | Only V1 turned ON; V2–V6 hardened | 1 Vulnerability (V1) | **V1: Vulnerable \| V2–V6: SAFE** | **PASS** |
 
 > **Note on Results:** These results represent experiments run in our controlled local testbed environment. They verify that our observation and probe logic correctly classifies vulnerable vs. safe direct upload implementations.
 
@@ -415,7 +415,7 @@ All test outputs and JSON reports are saved in `data/reports/` and `data/traces/
 
 - **Controlled Security Testbed:** A fully local, reproducible environment for testing direct-to-cloud upload security flaws.
 - **Automated Workflow Observation:** A browser automation engine that reliably captures multi-stage direct upload network traffic without manual proxy tools.
-- **Deterministic V1–V6 Probe Engine:** A modular, non-destructive suite of verification probes mapped to formal CWE definitions.
+- **Deterministic V1–V6 Probe Engine:**A modular, non-destructive suite of verification probes for testing the six direct cloud upload vulnerability categories (V1–V6).
 - **Structured Telemetry & Reports:** Standardized JSON schemas for recording workflow traces and security findings.
 - **Foundation for AI Auditing:** A working, verified base ready for Phase 3 AI agent integration.
 
