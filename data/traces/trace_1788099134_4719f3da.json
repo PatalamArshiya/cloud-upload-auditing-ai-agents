@@ -1,0 +1,378 @@
+{
+  "trace_id": "4719f3da-63c5-46dc-97b4-6e0dfbbf38fe",
+  "timestamp": 1788099134.2894447,
+  "target_page_url": "http://127.0.0.1:8000",
+  "scenario_name": "V1_ONLY",
+  "test_file_name": "audit_probe_sample.txt",
+  "test_file_size": 88,
+  "stage1": {
+    "endpoint_url": "http://127.0.0.1:8000/api/get-upload-url",
+    "method": "POST",
+    "request_headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "http://127.0.0.1:8000/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "request_body": {
+      "filename": "audit_probe_sample.txt",
+      "content_type": "text/plain",
+      "file_size": 88,
+      "upload_method": "PUT"
+    },
+    "status_code": 200,
+    "upload_type": "PUT",
+    "presigned_url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/77efaa9aee66_audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141215Z&X-Amz-Expires=300&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=20af4b741e1fd51df294949d8d60537a9786861f4d35192054bf7744e8836272",
+    "storage_key": "uploads/77efaa9aee66_audit_probe_sample.txt",
+    "expires_in_seconds": 300,
+    "acl": "private",
+    "callback_token": "7d6e7ad04fc2f64e7669676b2c3d478586b2e2df5d5b5ef2079a364ee5303601",
+    "signed_headers": {
+      "Content-Type": "text/plain"
+    },
+    "form_fields": null
+  },
+  "stage2": {
+    "storage_url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/77efaa9aee66_audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141215Z&X-Amz-Expires=300&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=20af4b741e1fd51df294949d8d60537a9786861f4d35192054bf7744e8836272",
+    "method": "PUT",
+    "status_code": 200,
+    "request_headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "http://127.0.0.1:8000/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "payload_size_bytes": 88,
+    "response_headers": {
+      "access-control-expose-headers": "Date, Etag, Server, Connection, Accept-Ranges, Content-Range, Content-Encoding, Content-Length, Content-Type, Content-Disposition, Last-Modified, Content-Language, Cache-Control, Retry-After, X-Amz-Bucket-Region, Expires, X-Amz*, X-Amz*, *",
+      "etag": "\"a32896dd47ddb62b75dd25d5b88d037f\"",
+      "x-content-type-options": "nosniff",
+      "date": "Sun, 30 Aug 2026 14:12:15 GMT",
+      "vary": "Origin, Accept-Encoding",
+      "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "access-control-allow-credentials": "true",
+      "x-amz-request-id": "18D09AB091801F18",
+      "x-ratelimit-remaining": "2377",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "http://127.0.0.1:8000",
+      "content-length": "0",
+      "x-xss-protection": "1; mode=block",
+      "x-ratelimit-limit": "2377",
+      "server": "MinIO"
+    },
+    "response_body": null
+  },
+  "stage3": {
+    "callback_url": "http://127.0.0.1:8000/api/upload-complete",
+    "method": "POST",
+    "request_headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "http://127.0.0.1:8000/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "payload": {
+      "key": "uploads/77efaa9aee66_audit_probe_sample.txt",
+      "filename": "audit_probe_sample.txt",
+      "file_size": 88,
+      "content_type": "text/plain",
+      "signature": "7d6e7ad04fc2f64e7669676b2c3d478586b2e2df5d5b5ef2079a364ee5303601"
+    },
+    "status_code": 200,
+    "response_body": {
+      "status": "success",
+      "message": "Upload recorded and registered in application database.",
+      "record": {
+        "id": "d065f780-c899-4716-9cce-e581c84def6f",
+        "key": "uploads/77efaa9aee66_audit_probe_sample.txt",
+        "filename": "audit_probe_sample.txt",
+        "file_size": 88,
+        "content_type": "text/plain",
+        "timestamp": 1788099135.2412946,
+        "verified": true
+      }
+    },
+    "is_verified": true
+  },
+  "raw_network_events": [
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/",
+      "method": "GET",
+      "headers": {
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\""
+      },
+      "post_data": null,
+      "timestamp": 1788099134.9620829
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/static/css/style.css",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788099134.9799454
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/static/js/uploader.js",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788099134.9803424
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/",
+      "status": 200,
+      "headers": {
+        "content-length": "9335",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Direct Cloud Upload Testbed (B.Tech Research)</title>\n    <link rel=\"stylesheet\" href=\"/static/css/style.css\">\n</head>\n<body>\n    <div class=\"container\">\n        <!-- Header -->\n        <header class=\"header\">\n            <div class=\"header-content\">\n                <div class=\"badge\">Controlled Educational Testbed</div>\n                <h1>Scal",
+      "timestamp": 1788099134.9836586
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/static/css/style.css",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "6716",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "etag": "\"7e45bb1a4a470332c8aa4adf4b21853e\"",
+        "content-type": "text/css; charset=utf-8",
+        "last-modified": "Sun, 30 Aug 2026 14:09:14 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": ":root {\n    --bg-main: #0f172a;\n    --bg-card: #1e293b;\n    --bg-sub: #334155;\n    --text-primary: #f8fafc;\n    --text-muted: #94a3b8;\n    --accent-blue: #38bdf8;\n    --accent-indigo: #818cf8;\n    --accent-green: #4ade80;\n    --accent-red: #f87171;\n    --accent-amber: #fbbf24;\n    --border-color: #334155;\n    --radius-lg: 12px;\n    --radius-md: 8px;\n}\n\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\nbody {\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, ",
+      "timestamp": 1788099134.9994082
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/scenarios",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788099135.005754
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/files",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788099135.0065486
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/static/js/uploader.js",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "13025",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "etag": "\"a4c299212eb6a1242ca346449fc9cc9b\"",
+        "content-type": "application/javascript",
+        "last-modified": "Thu, 27 Aug 2026 14:13:58 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "document.addEventListener(\"DOMContentLoaded\", () => {\n    const scenarioSelect = document.getElementById(\"scenario-select\");\n    const scenarioDesc = document.getElementById(\"scenario-desc-text\");\n    const scenarioTag = document.getElementById(\"active-scenario-tag\");\n    const flagsContainer = document.getElementById(\"flags-container\");\n    const uploadForm = document.getElementById(\"upload-form\");\n    const fileInput = document.getElementById(\"file-input\");\n    const uploadMethodSelect = docum",
+      "timestamp": 1788099135.058688
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/scenarios",
+      "status": 200,
+      "headers": {
+        "content-length": "3173",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "content-type": "application/json",
+        "server": "uvicorn"
+      },
+      "body_preview": "{\"active_key\":\"V1_ONLY\",\"active_config\":{\"name\":\"V1: Unrestricted Credential Acquisition\",\"description\":\"Publicly accessible endpoint issues presigned upload credentials without authentication.\",\"require_auth_for_credentials\":false,\"expiry_seconds\":300,\"enforce_type_and_size_limits\":true,\"allow_file_overwrite\":false,\"public_read_acl\":false,\"verify_callback_signature\":true},\"available_scenarios\":{\"VULNERABLE\":{\"name\":\"All Vulnerabilities Active (V1-V6)\",\"description\":\"Emulates a high-risk legacy ",
+      "timestamp": 1788099135.071808
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/files",
+      "status": 200,
+      "headers": {
+        "content-length": "683",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "content-type": "application/json",
+        "server": "uvicorn"
+      },
+      "body_preview": "{\"files\":[{\"id\":\"1b3d463b-a1b3-4e6f-b088-72bba0eb546b\",\"key\":\"uploads/audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"timestamp\":1788099130.7997375,\"verified\":false},{\"id\":\"164b9525-49c0-4559-82b1-30fd5a4b41b5\",\"key\":\"uploads/spoofed_phantom_probe_file.pdf\",\"filename\":\"spoofed_phantom_probe_file.pdf\",\"file_size\":99999,\"content_type\":\"application/pdf\",\"timestamp\":1788099132.0542414,\"verified\":false},{\"id\":\"0967d451-ff96-4ae8-94b7-c48fc4a1d1c",
+      "timestamp": 1788099135.0718856
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/get-upload-url",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "content-type": "application/json",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": "{\"filename\":\"audit_probe_sample.txt\",\"content_type\":\"text/plain\",\"file_size\":88,\"upload_method\":\"PUT\"}",
+      "timestamp": 1788099135.1875713
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/77efaa9aee66_audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141215Z&X-Amz-Expires=300&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=20af4b741e1fd51df294949d8d60537a9786861f4d35192054bf7744e8836272",
+      "method": "PUT",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "content-type": "text/plain",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788099135.2060478
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/get-upload-url",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "http://127.0.0.1:8000",
+        "content-length": "603",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "content-type": "application/json",
+        "vary": "Origin",
+        "server": "uvicorn",
+        "access-control-allow-credentials": "true"
+      },
+      "body_preview": "{\"upload_type\":\"PUT\",\"url\":\"http://127.0.0.1:9000/auditor-test-bucket/uploads/77efaa9aee66_audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141215Z&X-Amz-Expires=300&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=20af4b741e1fd51df294949d8d60537a9786861f4d35192054bf7744e8836272\",\"headers\":{\"Content-Type\":\"text/plain\"},\"key\":\"uploads/77efaa9aee66_audit_probe_sample.txt\",\"expires_in_seconds\":3",
+      "timestamp": 1788099135.2084503
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/upload-complete",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "content-type": "application/json",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": "{\"key\":\"uploads/77efaa9aee66_audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"signature\":\"7d6e7ad04fc2f64e7669676b2c3d478586b2e2df5d5b5ef2079a364ee5303601\"}",
+      "timestamp": 1788099135.2236512
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/77efaa9aee66_audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141215Z&X-Amz-Expires=300&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=20af4b741e1fd51df294949d8d60537a9786861f4d35192054bf7744e8836272",
+      "status": 200,
+      "headers": {
+        "access-control-expose-headers": "Date, Etag, Server, Connection, Accept-Ranges, Content-Range, Content-Encoding, Content-Length, Content-Type, Content-Disposition, Last-Modified, Content-Language, Cache-Control, Retry-After, X-Amz-Bucket-Region, Expires, X-Amz*, X-Amz*, *",
+        "etag": "\"a32896dd47ddb62b75dd25d5b88d037f\"",
+        "x-content-type-options": "nosniff",
+        "date": "Sun, 30 Aug 2026 14:12:15 GMT",
+        "vary": "Origin, Accept-Encoding",
+        "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "access-control-allow-credentials": "true",
+        "x-amz-request-id": "18D09AB091801F18",
+        "x-ratelimit-remaining": "2377",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "http://127.0.0.1:8000",
+        "content-length": "0",
+        "x-xss-protection": "1; mode=block",
+        "x-ratelimit-limit": "2377",
+        "server": "MinIO"
+      },
+      "body_preview": null,
+      "timestamp": 1788099135.2258837
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/files",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788099135.248527
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/upload-complete",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "http://127.0.0.1:8000",
+        "content-length": "321",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "content-type": "application/json",
+        "vary": "Origin",
+        "server": "uvicorn",
+        "access-control-allow-credentials": "true"
+      },
+      "body_preview": "{\"status\":\"success\",\"message\":\"Upload recorded and registered in application database.\",\"record\":{\"id\":\"d065f780-c899-4716-9cce-e581c84def6f\",\"key\":\"uploads/77efaa9aee66_audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"timestamp\":1788099135.2412946,\"verified\":true}}",
+      "timestamp": 1788099135.248751
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/files",
+      "status": 200,
+      "headers": {
+        "content-length": "907",
+        "date": "Sun, 30 Aug 2026 14:12:14 GMT",
+        "content-type": "application/json",
+        "server": "uvicorn"
+      },
+      "body_preview": "{\"files\":[{\"id\":\"1b3d463b-a1b3-4e6f-b088-72bba0eb546b\",\"key\":\"uploads/audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"timestamp\":1788099130.7997375,\"verified\":false},{\"id\":\"164b9525-49c0-4559-82b1-30fd5a4b41b5\",\"key\":\"uploads/spoofed_phantom_probe_file.pdf\",\"filename\":\"spoofed_phantom_probe_file.pdf\",\"file_size\":99999,\"content_type\":\"application/pdf\",\"timestamp\":1788099132.0542414,\"verified\":false},{\"id\":\"0967d451-ff96-4ae8-94b7-c48fc4a1d1c",
+      "timestamp": 1788099136.2582393
+    }
+  ],
+  "completed": true,
+  "error_message": null
+}

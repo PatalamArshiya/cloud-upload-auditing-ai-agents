@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Cloud Upload Testbed (B.Tech Research)</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="badge">Controlled Educational Testbed</div>
+                <h1>Scaling Direct Cloud Upload Auditing</h1>
+                <p class="subtitle">Simulated Web Application with Configurable Vulnerability Vectors (V1 – V6)</p>
+            </div>
+            <div class="status-pill">
+                <span class="status-indicator online"></span>
+                <span>Testbed Active</span>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column: Scenario Control & Upload Form -->
+            <div class="left-col">
+                <!-- Scenario Selector Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>1. Vulnerability Scenario Selector</h2>
+                        <span class="sub-badge" id="active-scenario-tag">{{ active_scenario_key }}</span>
+                    </div>
+                    <p class="card-desc">Select a security profile to emulate different direct upload configurations:</p>
+                    
+                    <div class="form-group">
+                        <label for="scenario-select">Active Security Profile:</label>
+                        <select id="scenario-select" class="custom-select">
+                            {% for key, sc in all_scenarios.items() %}
+                            <option value="{{ key }}" {% if key == active_scenario_key %}selected{% endif %}>
+                                {{ sc.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div id="scenario-details" class="scenario-details-box">
+                        <p class="scenario-description" id="scenario-desc-text">{{ active_scenario.description }}</p>
+                        <div class="flags-grid" id="flags-container">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Direct Upload Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>2. Direct-to-Cloud File Uploader</h2>
+                    </div>
+                    <p class="card-desc">Test the 3-stage direct upload lifecycle (Credential Dispatch &rarr; Direct Upload &rarr; Callback):</p>
+                    
+                    <form id="upload-form" class="upload-form">
+                        <div class="form-group">
+                            <label for="file-input">Select File to Upload:</label>
+                            <input type="file" id="file-input" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="upload-method">S3 Upload Protocol:</label>
+                                <select id="upload-method" class="custom-select">
+                                    <option value="PUT">Presigned PUT URL</option>
+                                    <option value="POST">Presigned POST Policy</option>
+                                </select>
+                            </div>
+                            <div class="form-group half">
+                                <label for="auth-token">Auth Bearer Token (V1 test):</label>
+                                <input type="text" id="auth-token" placeholder="Optional token (e.g. user-token-123)">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-upload" class="btn-primary">
+                            <span>Execute Direct Upload</span>
+                        </button>
+                    </form>
+
+                    <!-- Upload Progress -->
+                    <div id="progress-container" class="progress-container hidden">
+                        <div class="progress-info">
+                            <span id="progress-status-text">Uploading to Cloud Storage...</span>
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Live Workflow Trace & Uploaded Records -->
+            <div class="right-col">
+                <!-- Live Workflow Inspector -->
+                <div class="card inspector-card">
+                    <div class="card-header">
+                        <h2>3. Live Workflow Trace Inspector</h2>
+                        <button id="btn-clear-trace" class="btn-small">Clear Trace</button>
+                    </div>
+                    <div class="trace-steps">
+                        <!-- Stage 1 -->
+                        <div class="trace-step" id="trace-stage-1">
+                            <div class="step-icon">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Stage 1: Credential Acquisition (/api/get-upload-url)</div>
+                                <div class="step-data" id="trace-s1-data">Awaiting upload trigger...</div>
+                            </div>
+                        </div>
+
+                        <!-- Stage 2 -->
+                        <div class="trace-step" id="trace-stage-2">
+                            <div class="step-icon">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Stage 2: Direct Upload to S3/MinIO (localhost:9000)</div>
+                                <div class="step-data" id="trace-s2-data">Awaiting dispatch...</div>
+                            </div>
+                        </div>
+
+                        <!-- Stage 3 -->
+                        <div class="trace-step" id="trace-stage-3">
+                            <div class="step-icon">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Stage 3: Callback Notification (/api/upload-complete)</div>
+                                <div class="step-data" id="trace-s3-data">Awaiting completion...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database Records Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>4. Server Registered Files</h2>
+                        <button id="btn-refresh-files" class="btn-small">Refresh</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Key / Filename</th>
+                                    <th>Size</th>
+                                    <th>Verified</th>
+                                </tr>
+                            </thead>
+                            <tbody id="files-table-body">
+                                <tr><td colspan="3" class="text-center text-muted">No files registered yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/uploader.js"></script>
+</body>
+</html>
