@@ -1,0 +1,506 @@
+{
+  "trace_id": "4c881f7d-e2a2-42b4-b030-5c84bdb6f978",
+  "timestamp": 1788097902.80949,
+  "target_page_url": "http://127.0.0.1:8000",
+  "scenario_name": "VULNERABLE",
+  "test_file_name": "audit_probe_sample.txt",
+  "test_file_size": 88,
+  "stage1": {
+    "endpoint_url": "http://127.0.0.1:8000/api/get-upload-url",
+    "method": "POST",
+    "request_headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "http://127.0.0.1:8000/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "request_body": {
+      "filename": "audit_probe_sample.txt",
+      "content_type": "text/plain",
+      "file_size": 88,
+      "upload_method": "PUT"
+    },
+    "status_code": 200,
+    "upload_type": "PUT",
+    "presigned_url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T135147Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=3fafb7d2c67df854a03482e28b825a8fb6ff4370e5851c4b200339a110e53e81",
+    "storage_key": "uploads/audit_probe_sample.txt",
+    "expires_in_seconds": 604800,
+    "acl": "public-read",
+    "callback_token": "none",
+    "signed_headers": {
+      "Content-Type": "text/plain",
+      "x-amz-acl": "public-read"
+    },
+    "form_fields": null
+  },
+  "stage2": {
+    "storage_url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T135147Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=3fafb7d2c67df854a03482e28b825a8fb6ff4370e5851c4b200339a110e53e81",
+    "method": "PUT",
+    "status_code": 200,
+    "request_headers": {
+      "x-amz-acl": "public-read",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "http://127.0.0.1:8000/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "content-type": "text/plain",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "payload_size_bytes": 88,
+    "response_headers": {
+      "access-control-expose-headers": "Date, Etag, Server, Connection, Accept-Ranges, Content-Range, Content-Encoding, Content-Length, Content-Type, Content-Disposition, Last-Modified, Content-Language, Cache-Control, Retry-After, X-Amz-Bucket-Region, Expires, X-Amz*, X-Amz*, *",
+      "etag": "\"a32896dd47ddb62b75dd25d5b88d037f\"",
+      "x-content-type-options": "nosniff",
+      "date": "Sun, 30 Aug 2026 13:51:47 GMT",
+      "vary": "Origin, Accept-Encoding",
+      "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "access-control-allow-credentials": "true",
+      "x-amz-request-id": "18D09992B7993208",
+      "x-ratelimit-remaining": "2377",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "http://127.0.0.1:8000",
+      "content-length": "0",
+      "x-xss-protection": "1; mode=block",
+      "x-ratelimit-limit": "2377",
+      "server": "MinIO"
+    },
+    "response_body": null
+  },
+  "stage3": {
+    "callback_url": "http://127.0.0.1:8000/api/upload-complete",
+    "method": "POST",
+    "request_headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "http://127.0.0.1:8000/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+      "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "payload": {
+      "key": "uploads/audit_probe_sample.txt",
+      "filename": "audit_probe_sample.txt",
+      "file_size": 88,
+      "content_type": "text/plain",
+      "signature": "none"
+    },
+    "status_code": 200,
+    "response_body": {
+      "status": "success",
+      "message": "Upload recorded and registered in application database.",
+      "record": {
+        "id": "42d9f71b-37c4-486a-8899-a29f403e0428",
+        "key": "uploads/audit_probe_sample.txt",
+        "filename": "audit_probe_sample.txt",
+        "file_size": 88,
+        "content_type": "text/plain",
+        "timestamp": 1788097907.5051618,
+        "verified": false
+      }
+    },
+    "is_verified": false
+  },
+  "raw_network_events": [
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/",
+      "method": "GET",
+      "headers": {
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\""
+      },
+      "post_data": null,
+      "timestamp": 1788097903.4821453
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/static/css/style.css",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097903.50115
+    },
+    {
+      "event": "request",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097903.5015054
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/static/js/uploader.js",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097903.5017781
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/",
+      "status": 200,
+      "headers": {
+        "content-length": "9493",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 30 Aug 2026 13:51:43 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Direct Cloud Upload Testbed (B.Tech Research)</title>\n    <link rel=\"stylesheet\" href=\"/static/css/style.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n    <div class=\"container\">\n        <!-- Header -->\n        <header cl",
+      "timestamp": 1788097903.5051033
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/static/css/style.css",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "6655",
+        "date": "Sun, 30 Aug 2026 13:51:43 GMT",
+        "etag": "\"524b8d51e1f6663d0816e857534af3e9\"",
+        "content-type": "text/css; charset=utf-8",
+        "last-modified": "Thu, 27 Aug 2026 14:11:16 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": ":root {\n    --bg-main: #0f172a;\n    --bg-card: #1e293b;\n    --bg-sub: #334155;\n    --text-primary: #f8fafc;\n    --text-muted: #94a3b8;\n    --accent-blue: #38bdf8;\n    --accent-indigo: #818cf8;\n    --accent-green: #4ade80;\n    --accent-red: #f87171;\n    --accent-amber: #fbbf24;\n    --border-color: #334155;\n    --radius-lg: 12px;\n    --radius-md: 8px;\n}\n\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\nbody {\n    font-family: 'Inter', sans-serif;\n    background-color: var(--bg-mai",
+      "timestamp": 1788097903.6168787
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/static/js/uploader.js",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "13025",
+        "date": "Sun, 30 Aug 2026 13:51:43 GMT",
+        "etag": "\"a4c299212eb6a1242ca346449fc9cc9b\"",
+        "content-type": "application/javascript",
+        "last-modified": "Thu, 27 Aug 2026 14:13:58 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "document.addEventListener(\"DOMContentLoaded\", () => {\n    const scenarioSelect = document.getElementById(\"scenario-select\");\n    const scenarioDesc = document.getElementById(\"scenario-desc-text\");\n    const scenarioTag = document.getElementById(\"active-scenario-tag\");\n    const flagsContainer = document.getElementById(\"flags-container\");\n    const uploadForm = document.getElementById(\"upload-form\");\n    const fileInput = document.getElementById(\"file-input\");\n    const uploadMethodSelect = docum",
+      "timestamp": 1788097903.6230917
+    },
+    {
+      "event": "request",
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "method": "GET",
+      "headers": {
+        "origin": "http://127.0.0.1:8000",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "https://fonts.googleapis.com/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097906.5680442
+    },
+    {
+      "event": "request",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+      "method": "GET",
+      "headers": {
+        "origin": "http://127.0.0.1:8000",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "https://fonts.googleapis.com/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097906.568683
+    },
+    {
+      "event": "response",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      "status": 200,
+      "headers": {
+        "content-encoding": "gzip",
+        "x-content-type-options": "nosniff",
+        "expires": "Sun, 30 Aug 2026 13:52:05 GMT",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "date": "Sun, 30 Aug 2026 13:52:05 GMT",
+        "content-type": "text/css; charset=utf-8",
+        "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+        "last-modified": "Sun, 30 Aug 2026 13:27:14 GMT",
+        "x-frame-options": "SAMEORIGIN",
+        "strict-transport-security": "max-age=31536000",
+        "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+        "cache-control": "private, max-age=86400, stale-while-revalidate=604800",
+        "timing-allow-origin": "*",
+        "cross-origin-opener-policy": "same-origin-allow-popups",
+        "cross-origin-resource-policy": "cross-origin",
+        "access-control-allow-origin": "*",
+        "x-xss-protection": "0",
+        "server": "ESF"
+      },
+      "body_preview": "/* cyrillic-ext */\n@font-face {\n  font-family: 'Inter';\n  font-style: normal;\n  font-weight: 400;\n  font-display: swap;\n  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2JL7SUc.woff2) format('woff2');\n  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;\n}\n/* cyrillic */\n@font-face {\n  font-family: 'Inter';\n  font-style: normal;\n  font-weight: 400;\n  font-display: swap;\n  src: url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3",
+      "timestamp": 1788097906.5691445
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/scenarios",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097906.5714173
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/files",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097906.5718486
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/files",
+      "status": 200,
+      "headers": {
+        "content-length": "12",
+        "date": "Sun, 30 Aug 2026 13:51:46 GMT",
+        "content-type": "application/json",
+        "server": "uvicorn"
+      },
+      "body_preview": "{\"files\":[]}",
+      "timestamp": 1788097906.5942004
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/scenarios",
+      "status": 200,
+      "headers": {
+        "content-length": "3175",
+        "date": "Sun, 30 Aug 2026 13:51:46 GMT",
+        "content-type": "application/json",
+        "server": "uvicorn"
+      },
+      "body_preview": "{\"active_key\":\"VULNERABLE\",\"active_config\":{\"name\":\"All Vulnerabilities Active (V1-V6)\",\"description\":\"Emulates a high-risk legacy web application with all 6 direct-cloud-upload flaws enabled.\",\"require_auth_for_credentials\":false,\"expiry_seconds\":604800,\"enforce_type_and_size_limits\":false,\"allow_file_overwrite\":true,\"public_read_acl\":true,\"verify_callback_signature\":false},\"available_scenarios\":{\"VULNERABLE\":{\"name\":\"All Vulnerabilities Active (V1-V6)\",\"description\":\"Emulates a high-risk legac",
+      "timestamp": 1788097906.5942905
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/get-upload-url",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "content-type": "application/json",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": "{\"filename\":\"audit_probe_sample.txt\",\"content_type\":\"text/plain\",\"file_size\":88,\"upload_method\":\"PUT\"}",
+      "timestamp": 1788097906.7032785
+    },
+    {
+      "event": "response",
+      "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "status": 200,
+      "headers": {
+        "age": "13556",
+        "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+        "x-content-type-options": "nosniff",
+        "expires": "Mon, 30 Aug 2027 10:06:09 GMT",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "date": "Sun, 30 Aug 2026 10:06:09 GMT",
+        "last-modified": "Tue, 09 Sep 2025 18:33:53 GMT",
+        "content-type": "font/woff2",
+        "cache-control": "public, max-age=31536000",
+        "timing-allow-origin": "*",
+        "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+        "cross-origin-resource-policy": "cross-origin",
+        "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "*",
+        "content-length": "48256",
+        "x-xss-protection": "0",
+        "server": "sffe"
+      },
+      "body_preview": null,
+      "timestamp": 1788097906.9356859
+    },
+    {
+      "event": "response",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+      "status": 200,
+      "headers": {
+        "age": "523659",
+        "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+        "x-content-type-options": "nosniff",
+        "expires": "Tue, 24 Aug 2027 12:24:26 GMT",
+        "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+        "date": "Mon, 24 Aug 2026 12:24:26 GMT",
+        "last-modified": "Wed, 10 Sep 2025 16:52:37 GMT",
+        "content-type": "font/woff2",
+        "cache-control": "public, max-age=31536000",
+        "timing-allow-origin": "*",
+        "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+        "cross-origin-resource-policy": "cross-origin",
+        "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "*",
+        "content-length": "31432",
+        "x-xss-protection": "0",
+        "server": "sffe"
+      },
+      "body_preview": null,
+      "timestamp": 1788097906.9403315
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T135147Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=3fafb7d2c67df854a03482e28b825a8fb6ff4370e5851c4b200339a110e53e81",
+      "method": "PUT",
+      "headers": {
+        "x-amz-acl": "public-read",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "content-type": "text/plain",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097907.483945
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/get-upload-url",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "http://127.0.0.1:8000",
+        "content-length": "565",
+        "date": "Sun, 30 Aug 2026 13:51:46 GMT",
+        "content-type": "application/json",
+        "vary": "Origin",
+        "server": "uvicorn",
+        "access-control-allow-credentials": "true"
+      },
+      "body_preview": "{\"upload_type\":\"PUT\",\"url\":\"http://127.0.0.1:9000/auditor-test-bucket/uploads/audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T135147Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=3fafb7d2c67df854a03482e28b825a8fb6ff4370e5851c4b200339a110e53e81\",\"headers\":{\"Content-Type\":\"text/plain\",\"x-amz-acl\":\"public-read\"},\"key\":\"uploads/audit_probe_sample.txt\",\"expire",
+      "timestamp": 1788097907.484248
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/upload-complete",
+      "method": "POST",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "content-type": "application/json",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": "{\"key\":\"uploads/audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"signature\":\"none\"}",
+      "timestamp": 1788097907.5020387
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T135147Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=3fafb7d2c67df854a03482e28b825a8fb6ff4370e5851c4b200339a110e53e81",
+      "status": 200,
+      "headers": {
+        "access-control-expose-headers": "Date, Etag, Server, Connection, Accept-Ranges, Content-Range, Content-Encoding, Content-Length, Content-Type, Content-Disposition, Last-Modified, Content-Language, Cache-Control, Retry-After, X-Amz-Bucket-Region, Expires, X-Amz*, X-Amz*, *",
+        "etag": "\"a32896dd47ddb62b75dd25d5b88d037f\"",
+        "x-content-type-options": "nosniff",
+        "date": "Sun, 30 Aug 2026 13:51:47 GMT",
+        "vary": "Origin, Accept-Encoding",
+        "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+        "strict-transport-security": "max-age=31536000; includeSubDomains",
+        "access-control-allow-credentials": "true",
+        "x-amz-request-id": "18D09992B7993208",
+        "x-ratelimit-remaining": "2377",
+        "accept-ranges": "bytes",
+        "access-control-allow-origin": "http://127.0.0.1:8000",
+        "content-length": "0",
+        "x-xss-protection": "1; mode=block",
+        "x-ratelimit-limit": "2377",
+        "server": "MinIO"
+      },
+      "body_preview": null,
+      "timestamp": 1788097907.5047526
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/api/files",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788097907.5129018
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/upload-complete",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "http://127.0.0.1:8000",
+        "content-length": "309",
+        "date": "Sun, 30 Aug 2026 13:51:46 GMT",
+        "content-type": "application/json",
+        "vary": "Origin",
+        "server": "uvicorn",
+        "access-control-allow-credentials": "true"
+      },
+      "body_preview": "{\"status\":\"success\",\"message\":\"Upload recorded and registered in application database.\",\"record\":{\"id\":\"42d9f71b-37c4-486a-8899-a29f403e0428\",\"key\":\"uploads/audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"timestamp\":1788097907.5051618,\"verified\":false}}",
+      "timestamp": 1788097907.5132103
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/api/files",
+      "status": 200,
+      "headers": {
+        "content-length": "223",
+        "date": "Sun, 30 Aug 2026 13:51:46 GMT",
+        "content-type": "application/json",
+        "server": "uvicorn"
+      },
+      "body_preview": "{\"files\":[{\"id\":\"42d9f71b-37c4-486a-8899-a29f403e0428\",\"key\":\"uploads/audit_probe_sample.txt\",\"filename\":\"audit_probe_sample.txt\",\"file_size\":88,\"content_type\":\"text/plain\",\"timestamp\":1788097907.5051618,\"verified\":false}]}",
+      "timestamp": 1788097908.525863
+    }
+  ],
+  "completed": true,
+  "error_message": null
+}

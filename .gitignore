@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+*.log
+
+storage_mock/data/
+storage_mock/minio.exe
+data/temp_payloads/
+
+storage_mock/data/

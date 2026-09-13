@@ -1,0 +1,147 @@
+{
+  "run_id": "a8fb0d8a-edc0-4843-a300-15655458d0b3",
+  "timestamp": 1788099132.058748,
+  "trace_id": "f0b0eb7d-4a40-4102-8345-0a083392f674",
+  "target_page_url": "http://127.0.0.1:8000",
+  "scenario_name": "VULNERABLE",
+  "total_probes_run": 6,
+  "vulnerabilities_detected": 6,
+  "passed_checks": 0,
+  "findings": [
+    {
+      "category": "V1: Unrestricted Upload Credential Acquisition",
+      "code": "V1",
+      "title": "Unauthenticated Presigned Upload Credential Acquisition",
+      "vulnerable": true,
+      "severity": "HIGH",
+      "cwe_id": "CWE-306: Missing Authentication for Critical Function",
+      "description": "The application allows anonymous, unauthenticated clients to request valid presigned upload URLs/policies. An attacker can abuse this endpoint to obtain unauthorized cloud storage write credentials.",
+      "evidence": {
+        "endpoint_tested": "http://127.0.0.1:8000/api/get-upload-url",
+        "http_status": 200,
+        "unauth_request_succeeded": true,
+        "observed_in_trace": true,
+        "response_sample": {
+          "upload_type": "PUT",
+          "url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/probe_v1_auth_check.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141211Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=3ab53746a487febab57a355307aeea900677f79affc62e8cd4c640500d2d02ca",
+          "headers": {
+            "Content-Type": "text/plain",
+            "x-amz-acl": "public-read"
+          },
+          "key": "uploads/probe_v1_auth_check.txt",
+          "expires_in_seconds": 604800,
+          "acl": "public-read",
+          "callback_token": "none"
+        }
+      },
+      "recommendation": "Implement mandatory authentication and authorization checks (e.g. Bearer token or session cookie validation) before generating presigned upload credentials."
+    },
+    {
+      "category": "V2: Upload Credentials Validity Flaw",
+      "code": "V2",
+      "title": "Excessive Presigned Upload TTL (604800s (~7.0 days))",
+      "vulnerable": true,
+      "severity": "MEDIUM",
+      "cwe_id": "CWE-613: Insufficient Session Expiration",
+      "description": "The presigned upload credential has an excessively long validity period of 604800s (~7.0 days), exceeding the safe threshold of 300 seconds. Long-lived presigned credentials increase the exposure window if leaked or intercepted.",
+      "evidence": {
+        "source": "api_response_expires_in",
+        "calculated_ttl_seconds": 604800,
+        "max_recommended_ttl_seconds": 300
+      },
+      "recommendation": "Configure the presigned URL/policy TTL to a short window (e.g., 300 seconds / 5 minutes) sufficient only for completing the immediate client upload."
+    },
+    {
+      "category": "V3: Unrestricted File Types and File Size",
+      "code": "V3",
+      "title": "Unrestricted File Types and File Size Allowed",
+      "vulnerable": true,
+      "severity": "HIGH",
+      "cwe_id": "CWE-434: Unrestricted Upload of File with Dangerous Type",
+      "description": "The application and presigned storage policy lack critical upload boundaries: maximum file size limits (permits arbitrary DoS payloads), Content-Type / MIME restrictions (permits dangerous executable payloads).",
+      "evidence": {
+        "dangerous_mime_status": 200,
+        "oversized_request_status": 200,
+        "missing_constraints": [
+          "maximum file size limits (permits arbitrary DoS payloads)",
+          "Content-Type / MIME restrictions (permits dangerous executable payloads)"
+        ]
+      },
+      "recommendation": "Implement server-side MIME whitelisting, enforce size validation during presigned URL generation, and embed ['content-length-range', 1, <max_bytes>] conditions in POST policies."
+    },
+    {
+      "category": "V4: File Overwriting",
+      "code": "V4",
+      "title": "Predictable Storage Key Naming Allows Arbitrary File Overwrite",
+      "vulnerable": true,
+      "severity": "HIGH",
+      "cwe_id": "CWE-73: External Control of File Name or Path",
+      "description": "The backend dispatches static, un-namespaced object keys (e.g. 'uploads/audit_probe_sample.txt') directly derived from client-supplied filenames. An attacker can overwrite other users' stored files by uploading a file with the same filename.",
+      "evidence": {
+        "observed_storage_key": "uploads/audit_probe_sample.txt",
+        "client_filename": "audit_probe_sample.txt",
+        "test_dispatched_key_1": "uploads/probe_collision_sample.png",
+        "test_dispatched_key_2": "uploads/probe_collision_sample.png"
+      },
+      "recommendation": "Prepend a cryptographically random UUID or secure hash to storage keys (e.g., 'uploads/{uuid4()}_{filename}') to prevent key collisions and unauthorized overwriting."
+    },
+    {
+      "category": "V5: File Stealing & Unauthorized Public Read",
+      "code": "V5",
+      "title": "Uploaded Files Publicly Accessible via Unauthenticated Read",
+      "vulnerable": true,
+      "severity": "HIGH",
+      "cwe_id": "CWE-200: Exposure of Sensitive Information to an Unauthorized Actor",
+      "description": "Uploaded files are stored with 'public-read' access permissions (HTTP 400). Any unauthenticated third party with knowledge or guessing of the object key can download sensitive user data without authorization (File Stealing risk).",
+      "evidence": {
+        "observed_acl_in_trace": "public-read",
+        "tested_object_url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/audit_probe_sample.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141210Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=content-type%3Bhost%3Bx-amz-acl&X-Amz-Signature=db057d874ab4c2dc21244018068447e5dcede5145869b2e0784ee86ed9d086c4",
+        "unauthenticated_get_status": 400
+      },
+      "recommendation": "Enforce 'private' ACL on all uploaded objects and serve files exclusively through authenticated application endpoints or short-lived presigned download URLs."
+    },
+    {
+      "category": "V6: Callback Notification Spoofing",
+      "code": "V6",
+      "title": "Callback Notification Spoofing Vulnerability Detected",
+      "vulnerable": true,
+      "severity": "HIGH",
+      "cwe_id": "CWE-345: Insufficient Verification of Data Authenticity",
+      "description": "The backend accepted a fabricated upload callback (HTTP 200) for a non-existent object without validating cryptographic signatures or verifying that the file was actually written to cloud storage. An attacker can forge database entries, trigger post-processing workflows, or falsify transaction confirmations.",
+      "evidence": {
+        "tested_callback_endpoint": "http://127.0.0.1:8000/api/upload-complete",
+        "trace_recorded_verified": false,
+        "sent_spoofed_payload": {
+          "key": "uploads/spoofed_phantom_probe_file.pdf",
+          "filename": "spoofed_phantom_probe_file.pdf",
+          "file_size": 99999,
+          "content_type": "application/pdf",
+          "signature": "fabricated_spoofed_signature_token_xyz"
+        },
+        "response_http_status": 200,
+        "response_body": {
+          "status": "success",
+          "message": "Upload recorded and registered in application database.",
+          "record": {
+            "id": "164b9525-49c0-4559-82b1-30fd5a4b41b5",
+            "key": "uploads/spoofed_phantom_probe_file.pdf",
+            "filename": "spoofed_phantom_probe_file.pdf",
+            "file_size": 99999,
+            "content_type": "application/pdf",
+            "timestamp": 1788099132.0542414,
+            "verified": false
+          }
+        }
+      },
+      "recommendation": "Require HMAC-signed tokens in callback requests and perform server-side object verification (e.g. s3.head_object) to confirm object existence and byte size before registering the upload."
+    }
+  ],
+  "summary": {
+    "V1": true,
+    "V2": true,
+    "V3": true,
+    "V4": true,
+    "V5": true,
+    "V6": true
+  }
+}

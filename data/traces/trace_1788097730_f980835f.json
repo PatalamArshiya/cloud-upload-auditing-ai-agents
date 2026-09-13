@@ -1,0 +1,42 @@
+{
+  "trace_id": "f980835f-b202-4d0f-b36a-a844c3a93699",
+  "timestamp": 1788097730.5353577,
+  "target_page_url": "http://127.0.0.1:8000",
+  "scenario_name": null,
+  "test_file_name": "audit_probe_sample.txt",
+  "test_file_size": 88,
+  "stage1": null,
+  "stage2": null,
+  "stage3": null,
+  "raw_network_events": [
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/",
+      "method": "GET",
+      "headers": {
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\""
+      },
+      "post_data": null,
+      "timestamp": 1788097731.2047505
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/",
+      "status": 500,
+      "headers": {
+        "content-length": "21",
+        "content-type": "text/plain; charset=utf-8",
+        "date": "Sun, 30 Aug 2026 13:48:50 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "Internal Server Error",
+      "timestamp": 1788097731.2380812
+    }
+  ],
+  "completed": false,
+  "error_message": "Page.wait_for_selector: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"#file-input\")\n"
+}

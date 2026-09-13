@@ -1,0 +1,116 @@
+{
+  "trace_id": "7b45ad31-9c24-47bb-a680-d868b865703b",
+  "timestamp": 1788098893.3922453,
+  "target_page_url": "http://127.0.0.1:8000",
+  "scenario_name": null,
+  "test_file_name": "audit_probe_sample.txt",
+  "test_file_size": 88,
+  "stage1": null,
+  "stage2": null,
+  "stage3": null,
+  "raw_network_events": [
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/",
+      "method": "GET",
+      "headers": {
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\""
+      },
+      "post_data": null,
+      "timestamp": 1788098894.0877917
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/static/css/style.css",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788098894.1077259
+    },
+    {
+      "event": "request",
+      "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788098894.1083014
+    },
+    {
+      "event": "request",
+      "url": "http://127.0.0.1:8000/static/js/uploader.js",
+      "method": "GET",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "http://127.0.0.1:8000/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36",
+        "sec-ch-ua": "\"Not=A?Brand\";v=\"99\", \"HeadlessChrome\";v=\"151\", \"Chromium\";v=\"151\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "post_data": null,
+      "timestamp": 1788098894.1085114
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/",
+      "status": 200,
+      "headers": {
+        "content-length": "9493",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 30 Aug 2026 14:08:14 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Direct Cloud Upload Testbed (B.Tech Research)</title>\n    <link rel=\"stylesheet\" href=\"/static/css/style.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n    <div class=\"container\">\n        <!-- Header -->\n        <header cl",
+      "timestamp": 1788098894.109761
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/static/css/style.css",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "6655",
+        "date": "Sun, 30 Aug 2026 14:08:14 GMT",
+        "etag": "\"524b8d51e1f6663d0816e857534af3e9\"",
+        "content-type": "text/css; charset=utf-8",
+        "last-modified": "Thu, 27 Aug 2026 14:11:16 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": ":root {\n    --bg-main: #0f172a;\n    --bg-card: #1e293b;\n    --bg-sub: #334155;\n    --text-primary: #f8fafc;\n    --text-muted: #94a3b8;\n    --accent-blue: #38bdf8;\n    --accent-indigo: #818cf8;\n    --accent-green: #4ade80;\n    --accent-red: #f87171;\n    --accent-amber: #fbbf24;\n    --border-color: #334155;\n    --radius-lg: 12px;\n    --radius-md: 8px;\n}\n\n* {\n    box-sizing: border-box;\n    margin: 0;\n    padding: 0;\n}\n\nbody {\n    font-family: 'Inter', sans-serif;\n    background-color: var(--bg-mai",
+      "timestamp": 1788098894.1269612
+    },
+    {
+      "event": "response",
+      "url": "http://127.0.0.1:8000/static/js/uploader.js",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "content-length": "13025",
+        "date": "Sun, 30 Aug 2026 14:08:14 GMT",
+        "etag": "\"a4c299212eb6a1242ca346449fc9cc9b\"",
+        "content-type": "application/javascript",
+        "last-modified": "Thu, 27 Aug 2026 14:13:58 GMT",
+        "server": "uvicorn"
+      },
+      "body_preview": "document.addEventListener(\"DOMContentLoaded\", () => {\n    const scenarioSelect = document.getElementById(\"scenario-select\");\n    const scenarioDesc = document.getElementById(\"scenario-desc-text\");\n    const scenarioTag = document.getElementById(\"active-scenario-tag\");\n    const flagsContainer = document.getElementById(\"flags-container\");\n    const uploadForm = document.getElementById(\"upload-form\");\n    const fileInput = document.getElementById(\"file-input\");\n    const uploadMethodSelect = docum",
+      "timestamp": 1788098894.133858
+    }
+  ],
+  "completed": false,
+  "error_message": "Page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:8000/\", waiting until \"domcontentloaded\"\n"
+}

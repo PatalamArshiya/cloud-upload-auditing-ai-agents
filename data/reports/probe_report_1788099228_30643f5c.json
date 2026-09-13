@@ -1,0 +1,132 @@
+{
+  "run_id": "30643f5c-f295-4707-a455-f23ee7aa8ee8",
+  "timestamp": 1788099228.1115928,
+  "trace_id": "1a1328f3-37f4-45da-a20f-e490999db934",
+  "target_page_url": "http://127.0.0.1:8000",
+  "scenario_name": "V1_ONLY",
+  "total_probes_run": 6,
+  "vulnerabilities_detected": 1,
+  "passed_checks": 5,
+  "findings": [
+    {
+      "category": "V1: Unrestricted Upload Credential Acquisition",
+      "code": "V1",
+      "title": "Unauthenticated Presigned Upload Credential Acquisition",
+      "vulnerable": true,
+      "severity": "HIGH",
+      "cwe_id": "CWE-306: Missing Authentication for Critical Function",
+      "description": "The application allows anonymous, unauthenticated clients to request valid presigned upload URLs/policies. An attacker can abuse this endpoint to obtain unauthorized cloud storage write credentials.",
+      "evidence": {
+        "endpoint_tested": "http://127.0.0.1:8000/api/get-upload-url",
+        "http_status": 200,
+        "unauth_request_succeeded": true,
+        "observed_in_trace": true,
+        "response_sample": {
+          "upload_type": "PUT",
+          "url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/9bb48745a957_probe_v1_auth_check.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20260830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260830T141348Z&X-Amz-Expires=300&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Signature=75409cb65fd1a71a610db0523f2c40702ae8f061afe369fc880218eef84410bb",
+          "headers": {
+            "Content-Type": "text/plain"
+          },
+          "key": "uploads/9bb48745a957_probe_v1_auth_check.txt",
+          "expires_in_seconds": 300,
+          "acl": "private",
+          "callback_token": "287111d286320b46525066a5921f051702415861311f55ad83515648c4ce9210"
+        }
+      },
+      "recommendation": "Implement mandatory authentication and authorization checks (e.g. Bearer token or session cookie validation) before generating presigned upload credentials."
+    },
+    {
+      "category": "V2: Upload Credentials Validity Flaw",
+      "code": "V2",
+      "title": "Presigned Credential Validity Window is Short & Constrained",
+      "vulnerable": false,
+      "severity": "SAFE",
+      "cwe_id": "CWE-613: Insufficient Session Expiration",
+      "description": "The presigned upload credential expires in 300 seconds, which satisfies the maximum recommended TTL limit of 300 seconds.",
+      "evidence": {
+        "source": "api_response_expires_in",
+        "calculated_ttl_seconds": 300,
+        "max_recommended_ttl_seconds": 300
+      },
+      "recommendation": "Maintain short validity windows (<= 300s) on presigned upload tokens."
+    },
+    {
+      "category": "V3: Unrestricted File Types and File Size",
+      "code": "V3",
+      "title": "File Size and MIME Type Constraints Properly Enforced",
+      "vulnerable": false,
+      "severity": "SAFE",
+      "cwe_id": "CWE-434: Unrestricted Upload of File with Dangerous Type",
+      "description": "The application correctly rejected dangerous MIME types (HTTP 400) and oversized payloads, enforcing strict storage boundaries.",
+      "evidence": {
+        "dangerous_mime_status": 400,
+        "oversized_request_status": 400
+      },
+      "recommendation": "Maintain strict file type whitelisting and size boundaries."
+    },
+    {
+      "category": "V4: File Overwriting",
+      "code": "V4",
+      "title": "Object Storage Keys are Randomized with Collision Prevention",
+      "vulnerable": false,
+      "severity": "SAFE",
+      "cwe_id": "CWE-73: External Control of File Name or Path",
+      "description": "The backend generates unique, non-colliding storage keys for separate upload requests, preventing unauthorized file overwriting.",
+      "evidence": {
+        "observed_storage_key": "uploads/c1204f00fff2_audit_probe_sample.txt",
+        "client_filename": "audit_probe_sample.txt",
+        "test_dispatched_key_1": "uploads/dff3747b40f6_probe_collision_sample.png",
+        "test_dispatched_key_2": "uploads/5da28b5a87ec_probe_collision_sample.png"
+      },
+      "recommendation": "Maintain unique randomized namespacing for all object keys."
+    },
+    {
+      "category": "V5: File Stealing & Unauthorized Public Read",
+      "code": "V5",
+      "title": "Object Storage Enforces Private Access Controls",
+      "vulnerable": false,
+      "severity": "SAFE",
+      "cwe_id": "CWE-200: Exposure of Sensitive Information to an Unauthorized Actor",
+      "description": "Direct unauthenticated GET requests to the object URL were rejected with HTTP 403. Objects are properly protected against unauthorized public reading.",
+      "evidence": {
+        "observed_acl_in_trace": "private",
+        "tested_object_url": "http://127.0.0.1:9000/auditor-test-bucket/uploads/c1204f00fff2_audit_probe_sample.txt",
+        "unauthenticated_get_status": 403
+      },
+      "recommendation": "Maintain private object ACL policies."
+    },
+    {
+      "category": "V6: Callback Notification Spoofing",
+      "code": "V6",
+      "title": "Callback Notifications Strictly Verified with Signature & Storage Checks",
+      "vulnerable": false,
+      "severity": "SAFE",
+      "cwe_id": "CWE-345: Insufficient Verification of Data Authenticity",
+      "description": "Fabricated callback notification was correctly rejected by backend with HTTP 404. The application requires valid cryptographic signatures and verifies storage object integrity.",
+      "evidence": {
+        "tested_callback_endpoint": "http://127.0.0.1:8000/api/upload-complete",
+        "trace_recorded_verified": true,
+        "sent_spoofed_payload": {
+          "key": "uploads/spoofed_phantom_probe_file.pdf",
+          "filename": "spoofed_phantom_probe_file.pdf",
+          "file_size": 99999,
+          "content_type": "application/pdf",
+          "signature": "fabricated_spoofed_signature_token_xyz"
+        },
+        "response_http_status": 404,
+        "response_body": {
+          "detail": "[V6 Prevention] Callback Rejected: Object 'uploads/spoofed_phantom_probe_file.pdf' was not found in storage bucket."
+        }
+      },
+      "recommendation": "Maintain strict HMAC verification and head_object checks on post-upload webhooks."
+    }
+  ],
+  "summary": {
+    "V1": true,
+    "V2": false,
+    "V3": false,
+    "V4": false,
+    "V5": false,
+    "V6": false
+  }
+}
